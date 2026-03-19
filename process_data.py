@@ -14,8 +14,8 @@ def process_data(rawdata):
 
     for raw_data in rawdata:
         processed = {
-            "city": data["city"],
             "timestamp": datetime.now(),
+            "city": raw_data["city"],
             "temperature": raw_data["main"]["temp"],
             "feels_like": raw_data["main"]["feels_like"],
             "humidity": raw_data["main"]["humidity"],

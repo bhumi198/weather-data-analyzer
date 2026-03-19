@@ -8,15 +8,19 @@ def plot_data():
     df = df.sort_values(by="timestamp")
 
     plt.figure(figsize=(10,5))
-    plt.plot(df["timestamp"], df["temperature"], marker='o')
+    plt.plot(df["timestamp"], df["temperature"], label="Temperature", marker='o')
 
-    plt.plot(df["timestamp"], df["humidity"], marker='x')
-    plt.legend(["Temperature", "Humidity"])
+    plt.plot(df["timestamp"], df["humidity"], label="Humidity", marker='x')
 
-    plt.title("Temperature Trend Over Time")
+    # Highlight anomalies
+    anomalies = df[df["alert"] != "Normal"]
+    plt.scatter(anomalies["timestamp"], anomalies["temperature"], color='red', label="Anomaly")
+
+    plt.title("Temperature & HumidityTrends with Anomaly Detection")
     plt.xlabel("Time")
-    plt.ylabel("Temperature (°C)")
+    plt.ylabel("Values")
     plt.xticks(rotation=45)
+    plt.legend()
 
     plt.tight_layout()
     plt.show()

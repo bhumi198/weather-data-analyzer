@@ -25,5 +25,9 @@ def plot_data():
     plt.tight_layout()
     plt.show()
 
+    print("Average Temperature:", df["temperature"].mean())
+    print("Max Temperature:", df["temperature"].max())
+    print("Min Temperature:", df["temperature"].min())
+
 if __name__ == "__main__":
     plot_data()

@@ -9,16 +9,22 @@ def detect_anomaly(temp):
     else:
         return "Normal"
 
-def process_data(raw_data):
-    processed = {
-        "timestamp": datetime.now(),
-        "temperature": raw_data["main"]["temp"],
-        "feels_like": raw_data["main"]["feels_like"],
-        "humidity": raw_data["main"]["humidity"],
-        "pressure": raw_data["main"]["pressure"],
-        "weather": raw_data["weather"][0]["description"],
-        "alert": detect_anomaly(raw_data["main"]["temp"])
-    }
+def process_data(rawdata):
+    rows = []
 
-    df = pd.DataFrame([processed])
-    return df
+    for raw_data in rawdata:
+        processed = {
+            "city": data["city"],
+            "timestamp": datetime.now(),
+            "temperature": raw_data["main"]["temp"],
+            "feels_like": raw_data["main"]["feels_like"],
+            "humidity": raw_data["main"]["humidity"],
+            "pressure": raw_data["main"]["pressure"],
+            "weather": raw_data["weather"][0]["description"],
+            "alert": detect_anomaly(raw_data["main"]["temp"])
+        }
+
+        rows.append(processed)
+
+    df = pd.DataFrame(rows)
+    return pd.DataFrame(rows)

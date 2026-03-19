@@ -12,7 +12,13 @@ A Python-based data pipeline that fetches, processes, and analyzes real-time wea
 -  Detects anomalies in temperature  
 -  Performs **time-window based analysis (last n minutes)**  
 -  Identifies trends (increasing / decreasing / stable)  
--  Supports multi-city analysis  
+-  Supports multi-city analysis
+  <img width="1498" height="755" alt="image" src="https://github.com/user-attachments/assets/a6c83578-e83e-4928-8105-0e6fcbcdcb31" />
+  <img width="1496" height="736" alt="image" src="https://github.com/user-attachments/assets/616bfdac-dfa5-4e26-891c-2cfa8465e5a0" />
+  <img width="451" height="893" alt="image" src="https://github.com/user-attachments/assets/ff7229c1-45a7-41c7-89cb-ba6fa6bd4b2a" />
+
+
+
 
 ---
 

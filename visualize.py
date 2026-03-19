@@ -1,16 +1,26 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from analysis import overall_stats, get_time_window, trend_detection
 
 def plot_data():
+
     df = pd.read_csv("weather_data.csv")
 
     df["timestamp"] = pd.to_datetime(df["timestamp"])
     df = df.sort_values(by="timestamp")
 
-    #Temperature plot
-    plt.figure(figsize=(10,5))
+    try:
+        n_mins = int(input("\nEnter time window (in minutes) for analysis: "))
+    except:
+        print("Invalid input. Using default = 5 minutes.")
+        n_mins = 5
+    df = get_time_window(df, n_mins)
 
     cities = df["city"].unique()
+
+    #Temperature plot
+    plt.figure(figsize=(10,5))
+   
     for city in cities:
         city_data = df[df["city"] == city]
         plt.plot(city_data["timestamp"], city_data["temperature"], marker='o', label=city)
@@ -29,7 +39,6 @@ def plot_data():
     #Humidity plot
     plt.figure(figsize=(10,5))
 
-    cities = df["city"].unique()
     for city in cities:
         city_data = df[df["city"] == city]
         plt.plot(city_data["timestamp"], city_data["humidity"], marker='x', label=city)
@@ -41,20 +50,11 @@ def plot_data():
     plt.legend()
     plt.tight_layout()
 
+    #Stats
+    overall_stats(df)
+    trend_detection(df)
+
     plt.show()
-    
-    cities = df["city"].unique()
-
-    for city in cities:
-        city_data = df[df["city"] == city]
-
-        print(f"\n--- {city} ---")
-        print("Average Temperature:", city_data["temperature"].mean())
-        print("Max Temperature:", city_data["temperature"].max())
-        print("Min Temperature:", city_data["temperature"].min())
-        print("Average Humidity:", city_data["humidity"].mean())
-        print("Max Humidity:", city_data["humidity"].max())
-        print("Min Humidity:", city_data["humidity"].min())
 
 if __name__ == "__main__":
     plot_data()
